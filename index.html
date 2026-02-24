@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="AtomTruth | Lattice ChemRP Infrastructure">
+    <meta property="og:description" content="Enforcing physical compliance in pharmaceutical supply chains. We sell survival put options for North American Biotech.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#080A0C">
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <title>AtomTruth | Lattice ChemRP Infrastructure</title>
+    <style>
+        :root {
+            /* 机构金融主义配色 (Institutional Finance Scheme) */
+            /* 核心：传达“控制”与“价值” */
+            
+            --bg-color: #080A0C;       /* 深海蓝 (Deep Navy) - Palantir HQ 风格 */
+            --panel-bg: #0F1216;       /* 抬升层深蓝 - 模拟金库内壁 */
+            
+            --text-main: #EAEAEA;      /* 珍珠白/亮铂金 - 极高可读性 */
+            --text-dim: #8B949E;       /* 钨钢灰 (Tungsten) - 坚硬、冷静的次要信息 */
+            
+            --accent-color: #C5A059;   /* 哑光金 (Muted Gold) - 替代警示橙，象征储备与资产 */
+            
+            --border-color: #1F2329;   /* 隐晦的深灰边界 */
+            --grid-color: #11161C;     /* 极低对比度的海军蓝网格 */
+            
+            /* 保持原有的瑞士国际主义排版 (未修改) */
+            --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --font-mono: 'Courier New', Courier, monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 40px 40px; /* 工程网格背景 */
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.5;
+            overflow-x: hidden;
+            border-top: 4px solid var(--accent-color); /* 顶部现在是金色金条 */
+        }
+
+        /* 布局容器 */
+        .container {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* 头部：极简、冷酷 */
+        header {
+            margin-bottom: 5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .brand {
+            font-family: var(--font-mono);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            color: var(--text-main);
+        }
+        
+        .brand span { color: var(--accent-color); /* ATOMTRUTH 的后半部分变为金色 */ }
+
+        .meta-tag {
+            font-family: var(--font-mono);
+            font-size: 0.75rem; 
+            color: var(--text-dim); /* 钨钢灰 */
+            text-transform: uppercase;
+            text-align: right;
+            line-height: 1.4;
+        }
+
+        /* 章节通用样式 */
+        section { margin-bottom: 6rem; position: relative; }
+        
+        /* 左侧装饰线 */
+        section::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 5px;
+            width: 4px;
+            height: 20px;
+            background-color: var(--border-color);
+        }
+        
+        section.active::before { background-color: var(--accent-color); /* 激活状态变为金色 */ }
+
+        h2 { 
+            font-family: var(--font-mono);
+            font-size: 0.95rem; 
+            color: var(--accent-color); /* 标题变为金色 */
+            margin-bottom: 1.5rem; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        p { 
+            font-size: 1.1rem; 
+            color: var(--text-main); 
+            margin-bottom: 1.2rem; 
+            font-weight: 300;
+            max-width: 650px;
+        }
+        
+        strong { color: #fff; font-weight: 600; text-decoration: underline decoration-var(--accent-color); }
+
+        /* THE_AXIOM 特殊样式 */
+        .axiom-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            border-left: 2px solid var(--accent-color); /* 加粗并变金 */ 
+            padding-left: 2rem;
+            border-left: 1px solid var(--border-color);
+            padding-left: 1.5rem;
+
+            /* 核心更改：两端对齐，增加庄重感 */
+            text-align: justify;
+            text-justify: inter-word; /* 优化单词间距 */
+            hyphens: auto; /* 防止大片空白河流 */
+        }
+
+        /* 遥测窗口 (模拟) */
+        .telemetry-panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            font-family: var(--font-mono);
+            padding: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            position: relative;
+        }
+
+        .telemetry-header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .data-stream {
+            height: 120px;
+            overflow: hidden;
+            color: var(--text-dim); /* 钨钢灰数据流 */
+        }
+
+        .simulation-badge {
+            position: absolute;
+            /* 上移至 0.8rem，右移至 0.8rem，紧贴角落 */
+            top: 0.8rem; 
+            right: 0.8rem;
+            
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 2px 8px; /*稍微加宽一点内边距，增加呼吸感*/
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            background: rgba(197, 160, 89, 0.1);
+            letter-spacing: 0.5px; /* 增加字间距，防止重叠感 */
+        }
+
+        /* 资格审查通道 */
+        .uplink-box {
+            border: 1px dashed var(--border-color);
+            padding: 2rem;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.02); 
+            transition: all 0.3s ease;
+        }
+
+        .uplink-box:hover {
+            border-color: var(--accent-color); /* 悬停时显示金色边框 */
+            background: rgba(197, 160, 89, 0.05); /* 金色微光 */
+        }
+
+        .btn-uplink {
+            display: inline-block;
+            margin-top: .5rem;
+            padding: 0.8rem 2rem;
+            background: transparent; /* 透明背景 */
+            color: var(--accent-color); /* 金色文字 */
+            border: 1px solid var(--accent-color); /* 金色实线边框 */
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-uplink:hover { 
+            background: var(--accent-color); /* 悬停填满金色 */
+            color: #000; /* 文字变黑 */
+        }
+
+        /* 底部 */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding-top: 2rem;
+            margin-top: 6rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* 移动端 */
+        @media (max-width: 600px) {
+            .container { margin: 2rem auto; }
+            h1 { font-size: 1.5rem; }
+            .axiom-text { border: none; padding-left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="brand">ATOM<span>TRUTH</span></div>
+        <div class="meta-tag">
+            MOUNTAIN VIEW, CALIFORNIA<br>
+            UNITED STATES
+        </div>
+    </header>
+
+   <section class="active">
+        <h2>THE_AXIOM</h2>
+        <div class="axiom-text">
+            <p>
+                AI changes how the world thinks; Lattice ChemRP changes how the chemical world verifies.
+            </p>
+            <p>
+                Without physical trust, AI's optimal solutions fail to land. We are architecting the Lattice ChemRP to mathematically and physically eliminate "black box" variability in global pharmaceutical supply chains.
+            </p>
+            <p>
+                At AtomTruth, we don't just supply high-end intermediates; <strong>we enforce physical compliance.</strong>
+            </p>
+            <p>
+                By deploying hardware-level data lockdown, real-time digital twins, and unforgeable hash audits on foundry reactors, 
+                we secure deterministic purity for crucial clinical scale-ups.
+            </p>
+            <p style="color: #fff; border-left: 2px solid var(--accent-color); padding-left: 1rem;">
+                We don't sell nice-to-have features. 
+                <strong>We sell survival put options for North American Biotech.</strong>
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2>PROTOCOL_TELEMETRY</h2>
+        <p>Real-time battlefield telemetry prototype. Aggregating multi-vector sensor data to <strong>enforce</strong> the immutable "Golden Batch" standard.</p>
+        
+        <div class="telemetry-panel">
+            <div class="telemetry-header">
+                <span class="node-id">NODE: LOCALHOST_DEV_01</span>
+                <span class="simulation-badge">SIMULATION MODE | TEST LOOP</span>
+            </div>
+            
+            <div class="data-stream" id="log-output">
+                </div>
+            <div style="margin-top: 10px; border-top: 1px solid #333; padding-top: 5px;">
+                > LATTICE_CHEM_RP_DAEMON // LISTENING...
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>SYSTEM ARCHITECTURE</h2>
+        <p>We are currently architecting the legal and physical rails.</p>
+        <ul style="list-style: none; font-family: var(--font-mono); font-size: 0.9rem; color: var(--text-dim);">
+            <li style="color: var(--accent-color); margin-bottom: 0.5rem;">
+                [IN-PROGRESS] Phase I Deployment: Zero-Drift Chemical Batch Rejection Logic (Hardware Enforced)
+            </li>
+            <li>
+                [IN-PROGRESS] Strategic Regulatory & Governance Architecture
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>VETTING_UPLINK</h2>
+        <p>
+            AtomTruth hard-locks protocol capacity exclusively for vetted corporate partners. Access is reserved for partners who understand that in clinical scale-up, physical certainty is the only asset that cannot be hedged.
+        </p>
+        
+        <div class="uplink-box">
+            <div style="font-family: var(--font-mono); color: var(--accent-color); margin-bottom: .5rem;">
+                HANDSHAKE_INITIATION_PROTOCOL
+            </div>
+        
+            <a href="mailto:compliance@atomtruth.com?subject=VETTING_REQUEST" class="btn-uplink">INITIATE VETTING</a>
+            
+            <div style="margin-top: 1rem; font-size: 0.65rem; color: #555;">
+                *INSTITUTIONAL DOMAINS REQUIRED
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div>
+            &copy; 2026 ATOMTRUTH, Inc.<br>
+        </div>
+    </footer>
+</div>
+
+<script>
+    // 模拟数据流脚本
+    const logOutput = document.getElementById('log-output');
+    let hashCounter = 0;
+
+    function generateHash() {
+        const chars = "0123456789ABCDEF";
+        let hash = "0x";
+        for (let i = 0; i < 16; i++) hash += chars[Math.floor(Math.random() * 16)];
+        return hash;
+    }
+
+    function addLog() {
+        const now = new Date();
+        const time = now.toISOString().split('T')[1].slice(0, -1);
+        
+        const temp = (119.8 + Math.random() * 0.4).toFixed(2);
+        const amps = (24.5 + Math.random() * 0.2).toFixed(2);
+        
+        const div = document.createElement('div');
+        div.style.marginBottom = '4px';
+        /* 这里的文字颜色也需要微调以适应深海蓝背景 */
+        div.innerHTML = `<span style="color: #5d6d7e;">[${time}]</span> ` +
+                        `T:${temp}°C | I:${amps}A | ` +
+                        `<span style="color: var(--text-dim);">HASH_ID:${hashCounter++}</span> ` +
+                        `<span style="color: #4a5568;">>> ${generateHash()}</span>`;
+        
+        logOutput.prepend(div); 
+
+        if (logOutput.children.length > 5) {
+            logOutput.removeChild(logOutput.lastChild);
+        }
+    }
+
+    setInterval(addLog, 1200);
+    for(let i=0; i<3; i++) addLog();
+</script>
+
+</body>
+</html>
